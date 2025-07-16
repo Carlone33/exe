@@ -27,7 +27,7 @@ jobs:
         run: npm install -g yarn
 
       - name: Instalar dependencias
-        run: yarn install
+        run: npm install
 
       - name: Compilar VS Code
         run: yarn run vscode-win32-x64

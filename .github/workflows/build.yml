@@ -1,13 +1,13 @@
-name: Compilar VS Code
+name: Build VS Code desde el source
 
 on:
+  workflow_dispatch:  # permite ejecutar el build manualmente
   push:
-    branches: [main]
-  workflow_dispatch:
+    branches: [main]  # también se ejecuta en cada push a main
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Clonar el repositorio
@@ -18,11 +18,27 @@ jobs:
       with:
         node-version: '18'
 
+    - name: Instalar Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
     - name: Instalar Yarn
       run: npm install -g yarn
 
     - name: Instalar dependencias
       run: yarn install
 
-    - name: Compilar el proyecto
-      run: yarn run compile
+    - name: Compilar VS Code
+      run: yarn run vscode-win32-x64
+
+    - name: Empaquetar ejecutable
+      run: |
+        mkdir build-output
+        copy .\.build\win32-x64\* build-output
+
+    - name: Subir artefacto
+      uses: actions/upload-artifact@v3
+      with:
+        name: vscode-build
+        path: build-output/

@@ -7,7 +7,7 @@ import { spawn } from 'child_process';
 import { promises as fs } from 'fs';
 import path from 'path';
 import byline from 'byline';
-import { rgPath } from '@vscode/ripgrep';
+import { rgPath } from 'vscode-ripgrep-with-github-api-error-fix';
 import Parser from 'tree-sitter';
 const { typescript } = require('tree-sitter-typescript');
 const product = require('../../product.json');

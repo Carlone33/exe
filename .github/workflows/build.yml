@@ -38,7 +38,7 @@ jobs:
           copy .\.build\win32-x64\* build-output
 
       - name: Subir artefacto
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: vscode-build
           path: build-output/
